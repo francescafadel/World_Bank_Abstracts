@@ -7,8 +7,11 @@ for extracting abstracts from World Bank project URLs.
 """
 
 import pandas as pd
-from world_bank_scraper import WorldBankScraper
+import sys
 import os
+sys.path.append('../src')
+
+from world_bank_scraper import WorldBankScraper
 
 def create_sample_csv():
     """Create a sample CSV file for testing"""

@@ -5,7 +5,7 @@ Test script to verify the fixed API scraper works correctly
 
 import sys
 import os
-sys.path.append('.')
+sys.path.append('../src')
 
 from api_scraper import WorldBankAPIScraper
 

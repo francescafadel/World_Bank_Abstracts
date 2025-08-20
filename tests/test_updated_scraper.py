@@ -5,7 +5,7 @@ Test script to verify the updated API scraper leaves abstract blank when no proj
 
 import sys
 import os
-sys.path.append('.')
+sys.path.append('../src')
 
 from api_scraper import WorldBankAPIScraper
 

@@ -10,22 +10,34 @@ This project automatically extracts full abstracts from World Bank project pages
 3. Extracting the `project_abstract` field when available
 4. Saving results to a new CSV file with abstracts
 
-## ✨ Features
+## 📁 Project Structure
 
-- **API-Based Extraction**: Uses World Bank's official API for reliable data extraction
-- **High Success Rate**: Extracts abstracts from 65-80% of projects
-- **Smart Fallback**: Leaves abstract column blank when no abstract is available
-- **Batch Processing**: Handles large datasets efficiently
-- **Comprehensive Logging**: Detailed progress tracking and error reporting
-- **CSV Support**: Works with standard CSV files
-
-## 📊 Results
-
-The tool successfully processed **1,375 World Bank projects** with the following results:
-
-- **Priority Projects**: 528 projects → 421 abstracts extracted (80% success rate)
-- **Remaining Projects**: 847 projects → 483 abstracts extracted (57% success rate)
-- **Total**: 1,375 projects → 904 abstracts extracted (66% overall success rate)
+```
+World_Bank_Abstracts/
+├── src/                                    # Source code
+│   ├── api_scraper.py                     # Main API-based scraper
+│   ├── world_bank_scraper.py              # Selenium-based scraper
+│   ├── simple_scraper.py                  # Requests/BeautifulSoup scraper
+│   ├── filter_high_priority_projects.py   # Dataset filtering utilities
+│   ├── identify_remaining_projects.py     # Project identification script
+│   └── setup.py                           # Setup and installation script
+├── data/                                   # Data files
+│   ├── priority_projects_with_abstracts.csv
+│   ├── remaining_projects_to_process_with_abstracts.csv
+│   ├── cleaned_world_bank_data.csv
+│   └── sample_page.html
+├── docs/                                   # Documentation
+│   ├── README.md                          # Detailed documentation
+│   ├── manual_extraction_guide.md         # Manual extraction instructions
+│   └── SOLUTION_SUMMARY.md                # Project summary
+├── tests/                                  # Test files
+│   ├── test_*.py                          # Various test scripts
+├── examples/                               # Example usage
+│   └── example_usage.py                   # Usage examples
+├── logs/                                   # Log files
+├── requirements.txt                        # Python dependencies
+└── .gitignore                             # Git ignore rules
+```
 
 ## 🚀 Quick Start
 
@@ -51,32 +63,42 @@ pip install -r requirements.txt
 
 1. **Basic Usage**:
 ```bash
-python api_scraper.py your_input_file.csv
+python src/api_scraper.py data/your_input_file.csv
 ```
 
 2. **With Custom Delay**:
 ```bash
-python api_scraper.py your_input_file.csv --delay 2
+python src/api_scraper.py data/your_input_file.csv --delay 2
 ```
 
 3. **Test Mode** (process first 5 projects):
 ```bash
-python api_scraper.py your_input_file.csv --test 5
+python src/api_scraper.py data/your_input_file.csv --test 5
 ```
 
-## 📁 File Structure
+## 📊 Results
 
-```
-World_Bank_Abstracts/
-├── api_scraper.py              # Main scraper script
-├── requirements.txt            # Python dependencies
-├── README.md                   # This file
-├── .gitignore                  # Git ignore rules
-├── priority_projects_with_abstracts.csv      # Priority projects with abstracts
-├── remaining_projects_to_process_with_abstracts.csv  # Remaining projects with abstracts
-├── cleaned_world_bank_data.csv # Original cleaned dataset
-└── logs/                       # Processing logs
-```
+The tool successfully processed **1,375 World Bank projects** with the following results:
+
+- **Priority Projects**: 528 projects → 421 abstracts extracted (80% success rate)
+- **Remaining Projects**: 847 projects → 483 abstracts extracted (57% success rate)
+- **Total**: 1,375 projects → 904 abstracts extracted (66% overall success rate)
+
+## ✨ Features
+
+- **API-Based Extraction**: Uses World Bank's official API for reliable data extraction
+- **High Success Rate**: Extracts abstracts from 65-80% of projects
+- **Smart Fallback**: Leaves abstract column blank when no abstract is available
+- **Batch Processing**: Handles large datasets efficiently
+- **Comprehensive Logging**: Detailed progress tracking and error reporting
+- **CSV Support**: Works with standard CSV files
+
+## 📈 Performance
+
+- **Processing Speed**: ~1 project per second
+- **Success Rate**: 65-80% depending on dataset
+- **API Reliability**: 100% uptime using official World Bank API
+- **Error Handling**: Graceful handling of missing data and network issues
 
 ## 🔧 Configuration
 
@@ -92,13 +114,6 @@ The script creates a new CSV file with:
 - All original columns from your input file
 - New "Abstract" column containing extracted abstracts
 - Blank entries where no abstract was available
-
-## 📈 Performance
-
-- **Processing Speed**: ~1 project per second
-- **Success Rate**: 65-80% depending on dataset
-- **API Reliability**: 100% uptime using official World Bank API
-- **Error Handling**: Graceful handling of missing data and network issues
 
 ## 🛠️ Technical Details
 
@@ -116,13 +131,6 @@ https://search.worldbank.org/api/v3/projects?format=json&fl=*&qterm={PROJECT_ID}
 3. Looks for `project_abstract` field first
 4. Falls back to other abstract-related fields if needed
 5. Cleans and formats the extracted text
-
-### Error Handling
-
-- Network timeouts and retries
-- Missing project data handling
-- Invalid URL detection
-- Comprehensive logging for debugging
 
 ## 📝 Logging
 
